@@ -97,7 +97,3 @@ export const CONTACTS: readonly Contact[] = [
   { name: 'Jash Chauhan', role: 'Web & IT', phone: '+91 8668693168', email: 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/jash.webp' },
   { name: 'Ansh Sonkusare', role: 'Web & IT', phone: '+91 8668693168', email: 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/no-image.png' }
 ];
-
-export const TEAM: readonly TeamMember[] = [
-  ...CONTACTS.map(({ name, photo, role }) => ({ name, role, photo })),
-];
