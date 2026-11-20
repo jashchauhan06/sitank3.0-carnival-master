@@ -1,0 +1,1712 @@
+<title>SITank 3.0 3.0 Winter Carnival</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600&display=swap">
+<style>
+  /* Layout: a printed carnival programme. Every section sits inside the poster's thin cream frame with notched corners and diamond studs; the hero rebuilds the poster's night scene from its own cut-out art. */
+  :root {
+    --night: #1d2945;
+    --night-deep: #131b30;
+    --night-soft: #26355a;
+    --cream: #f6e6cf;
+    --cream-dim: #d9c8b0;
+    --ribbon: #a8423c;
+    --ribbon-deep: #7e2e2b;
+    --bulb: #f6c46a;
+    --frost: #c7d1e6;
+    --ink: #2a1f1a;
+    --f-display: 'Raleway', 'Avenir Next', 'Segoe UI', sans-serif;
+    --f-body: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+    --track: .32em;
+    color-scheme: dark;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 76px;
+  }
+
+  body {
+    margin: 0;
+    background: var(--night-deep);
+    color: var(--cream);
+    font-family: var(--f-body);
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px);
+    z-index: 30;
+    background: var(--night-deep);
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--bulb);
+    outline-offset: 3px;
+  }
+
+  .gut {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  .inner {
+    max-width: 1080px;
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    font-family: var(--f-display);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: var(--track);
+    text-transform: uppercase;
+    color: var(--cream-dim);
+  }
+
+  /* ---------- the poster frame ---------- */
+  .frame {
+    position: relative;
+    --cut: 26px;
+    padding: clamp(28px, 5vw, 56px) clamp(20px, 4vw, 48px);
+  }
+
+  .frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 1px solid rgb(246 230 207 / .55);
+    clip-path: polygon(var(--cut) 0, calc(50% - 22px) 0, calc(50% - 22px) 1px, calc(50% + 22px) 1px, calc(50% + 22px) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, calc(50% + 22px) 100%, calc(50% + 22px) calc(100% - 1px), calc(50% - 22px) calc(100% - 1px), calc(50% - 22px) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
+  }
+
+  .frame>.corner {
+    position: absolute;
+    width: calc(var(--cut) * 2);
+    height: calc(var(--cut) * 2);
+    pointer-events: none;
+  }
+
+  .frame>.corner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgb(246 230 207 / .55);
+    border-radius: 50%;
+    clip-path: inset(0 0 50% 50%);
+  }
+
+  .frame>.tl {
+    left: calc(var(--cut) * -1);
+    top: calc(var(--cut) * -1);
+  }
+
+  .frame>.tl::before {
+    clip-path: inset(50% 0 0 50%);
+  }
+
+  .frame>.tr {
+    right: calc(var(--cut) * -1);
+    top: calc(var(--cut) * -1);
+  }
+
+  .frame>.tr::before {
+    clip-path: inset(50% 50% 0 0);
+  }
+
+  .frame>.bl {
+    left: calc(var(--cut) * -1);
+    bottom: calc(var(--cut) * -1);
+  }
+
+  .frame>.bl::before {
+    clip-path: inset(0 0 50% 50%);
+  }
+
+  .frame>.br {
+    right: calc(var(--cut) * -1);
+    bottom: calc(var(--cut) * -1);
+  }
+
+  .frame>.br::before {
+    clip-path: inset(0 50% 50% 0);
+  }
+
+  .stud {
+    position: absolute;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    translate: -50% -50%;
+    background: var(--cream);
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  }
+
+  .stud.top {
+    top: 0;
+  }
+
+  .stud.bot {
+    top: 100%;
+  }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: rgb(19 27 48 / .86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgb(246 230 207 / .14);
+  }
+
+  .nav .inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    min-height: 60px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: .01em;
+  }
+
+  .brand img {
+    width: 34px;
+  }
+
+  .nav ul {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    margin: 0 0 0 auto;
+    padding: 0;
+  }
+
+  .nav ul a {
+    font-family: var(--f-display);
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream-dim);
+    padding-block: 6px;
+    border-bottom: 1px solid transparent;
+  }
+
+  .nav ul a:hover,
+  .nav ul a[aria-current="true"] {
+    color: var(--cream);
+    border-color: var(--bulb);
+  }
+
+  .cta {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream);
+    background: var(--ribbon);
+    border: 1px solid var(--cream);
+    box-shadow: 0 0 0 3px var(--ribbon), 0 0 0 4px rgb(246 230 207 / .5);
+    padding: 9px 16px;
+    white-space: nowrap;
+  }
+
+  .cta:hover {
+    background: var(--ribbon-deep);
+  }
+
+  @media (max-width: 900px) {
+    .nav ul {
+      display: none;
+    }
+
+    .nav .cta {
+      margin-left: auto;
+    }
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative;
+    background: radial-gradient(ellipse 70% 60% at 50% 18%, #2c3b62, transparent 70%), linear-gradient(var(--night) 0%, #22304f 58%, #1a2440 100%);
+    overflow: hidden;
+  }
+
+  .hero .frame {
+    margin: clamp(14px, 2.5vw, 28px) auto;
+    max-width: 1180px;
+    padding: 0;
+    min-height: min(860px, calc(100svh - 92px));
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(1.5px 1.5px at 12% 18%, #fff8 50%, transparent), radial-gradient(1px 1px at 27% 32%, #fff6 50%, transparent), radial-gradient(1.5px 1.5px at 44% 12%, #fff7 50%, transparent), radial-gradient(1px 1px at 63% 26%, #fff6 50%, transparent), radial-gradient(1.5px 1.5px at 78% 14%, #fff8 50%, transparent), radial-gradient(1px 1px at 88% 36%, #fff5 50%, transparent), radial-gradient(1px 1px at 8% 44%, #fff5 50%, transparent), radial-gradient(1.5px 1.5px at 52% 40%, #fff6 50%, transparent), radial-gradient(1px 1px at 35% 6%, #fff6 50%, transparent), radial-gradient(1px 1px at 94% 6%, #fff6 50%, transparent);
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: clamp(46px, 8vh, 84px) 20px 0;
+  }
+
+  .presents {
+    font-family: var(--f-display);
+    font-size: clamp(14px, 1.6vw, 19px);
+    letter-spacing: .2em;
+  }
+
+  .presents i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-size: .95em;
+    letter-spacing: .14em;
+    margin-top: 2px;
+  }
+
+  .presents i::before,
+  .presents i::after {
+    content: "";
+    width: 54px;
+    height: 1px;
+    background: var(--cream-dim);
+  }
+
+  .fest {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: clamp(30px, 5.4vw, 64px);
+    letter-spacing: .02em;
+    margin-top: 4px;
+  }
+
+  .wordmark {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    margin-top: clamp(4px, 2vh, 18px);
+  }
+
+  .wordmark img {
+    width: clamp(110px, 16vw, 190px);
+    margin-bottom: -6px;
+  }
+
+  .wordmark h1 {
+    font-weight: 600;
+    font-size: clamp(70px, 14vw, 168px);
+    line-height: .9;
+    letter-spacing: -.01em;
+    display: flex;
+    align-items: center;
+    gap: .16em;
+  }
+
+  .wordmark h1 .flake {
+    font-size: .22em;
+    color: var(--cream-dim);
+  }
+
+  .ribbon {
+    position: relative;
+    width: min(560px, 86vw);
+    aspect-ratio: 737 / 106;
+    background: url(art/ribbon.webp) center / 100% 100% no-repeat;
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+  }
+
+  .ribbon span {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: clamp(14px, 2.3vw, 26px);
+    letter-spacing: .26em;
+    padding-left: .26em;
+    color: var(--cream);
+    translate: 0 -4%;
+  }
+
+  .tagline {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--f-display);
+    font-size: clamp(12px, 1.4vw, 16px);
+    letter-spacing: .34em;
+    margin-top: 14px;
+    color: var(--cream-dim);
+  }
+
+  .tagline::before,
+  .tagline::after {
+    content: "";
+    width: clamp(28px, 6vw, 60px);
+    height: 1px;
+    background: currentColor;
+  }
+
+  .scene {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    width: 100%;
+    aspect-ratio: 1180 / 420;
+    min-height: 230px;
+  }
+
+  .scene .field {
+    position: absolute;
+    inset: auto 0 0;
+    height: 100%;
+    background: url(art/field.webp) center 62% / cover no-repeat;
+    -webkit-mask: linear-gradient(transparent, #000 34%);
+    mask: linear-gradient(transparent, #000 34%);
+  }
+
+  .scene img {
+    position: absolute;
+    will-change: transform;
+  }
+
+  .scene .bigtop {
+    width: 36%;
+    left: 32%;
+    bottom: 13%;
+    filter: drop-shadow(0 0 30px rgb(246 196 106 / .35));
+  }
+
+  .scene .wheel {
+    width: 19%;
+    right: 3%;
+    bottom: 13%;
+  }
+
+  .scene .stall {
+    width: 15%;
+    left: 0;
+    bottom: 8%;
+  }
+
+  .scene .tent-cream {
+    width: 15%;
+    left: 18%;
+    bottom: 17%;
+  }
+
+  .scene .tent-grey {
+    width: 11%;
+    left: 64%;
+    bottom: 20%;
+    opacity: .9;
+  }
+
+  .scene .fairy {
+    width: 50%;
+    left: 24%;
+    bottom: 52%;
+  }
+
+  .scene .bush-l {
+    width: 9%;
+    left: 0;
+    bottom: 0;
+  }
+
+  .scene .bush-r {
+    width: 10%;
+    right: 0;
+    bottom: 0;
+  }
+
+  .deco {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .deco.branch-l {
+    left: 0;
+    top: 0;
+    width: clamp(110px, 17vw, 230px);
+  }
+
+  .deco.branch-r {
+    right: 0;
+    top: 2%;
+    width: clamp(100px, 15vw, 190px);
+  }
+
+  .deco.bulbs-l {
+    left: 2%;
+    top: 13%;
+    width: clamp(90px, 12vw, 170px);
+  }
+
+  .deco.bulbs-r {
+    right: 3%;
+    top: 18%;
+    width: clamp(90px, 13vw, 186px);
+  }
+
+  .glow {
+    animation: glow 3.6s ease-in-out infinite;
+  }
+
+  .glow.slow {
+    animation-duration: 5.2s;
+    animation-delay: -1.4s;
+  }
+
+  @keyframes glow {
+    50% {
+      filter: brightness(1.28) drop-shadow(0 0 10px rgb(246 196 106 / .55));
+    }
+  }
+
+  .ticket {
+    position: relative;
+    z-index: 3;
+    align-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px 22px;
+    margin: -6% 16px clamp(20px, 3.5vh, 36px);
+    padding: 12px 26px;
+    border: 1px solid rgb(246 230 207 / .7);
+    border-radius: 999px;
+    background: rgb(19 27 48 / .72);
+    backdrop-filter: blur(4px);
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: clamp(14px, 1.6vw, 18px);
+  }
+
+  .ticket .it {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ticket svg {
+    width: 22px;
+    height: 22px;
+    flex: none;
+  }
+
+  .ticket .sep {
+    width: 1px;
+    height: 26px;
+    background: rgb(246 230 207 / .5);
+  }
+
+  .ticket sup {
+    font-size: .6em;
+  }
+
+  @media (max-width: 520px) {
+    .ticket .sep {
+      display: none;
+    }
+
+    .ticket {
+      border-radius: 18px;
+    }
+  }
+
+  .countdown {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: clamp(14px, 4vw, 36px);
+    margin: 0 0 clamp(22px, 4vh, 40px);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown div {
+    display: grid;
+    justify-items: center;
+  }
+
+  .countdown b {
+    font-family: var(--f-display);
+    font-weight: 300;
+    font-size: clamp(26px, 4vw, 40px);
+    line-height: 1;
+  }
+
+  .countdown span {
+    font-family: var(--f-display);
+    font-size: 11px;
+    letter-spacing: .28em;
+    color: var(--cream-dim);
+    margin-top: 6px;
+  }
+
+  /* ---------- sections ---------- */
+  section.band {
+    position: relative;
+    padding-block: clamp(56px, 9vw, 110px);
+  }
+
+  section.band.alt {
+    background: linear-gradient(var(--night-deep), var(--night) 40%, var(--night-deep));
+  }
+
+  .sec-head {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 12px;
+    margin-bottom: clamp(32px, 5vw, 52px);
+  }
+
+  .sec-head h2 {
+    font-size: clamp(26px, 4vw, 44px);
+    letter-spacing: var(--track);
+    text-transform: uppercase;
+    padding-left: var(--track);
+  }
+
+  .sec-head .sub {
+    font-family: var(--f-display);
+    font-size: clamp(13px, 1.5vw, 16px);
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: var(--bulb);
+    padding-left: .4em;
+  }
+
+  .rule {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: min(340px, 70%);
+  }
+
+  .rule::before,
+  .rule::after {
+    content: "";
+    width: 9px;
+    height: 9px;
+    background: var(--cream);
+    rotate: 45deg;
+    flex: none;
+  }
+
+  .rule i {
+    flex: 1;
+    height: 2px;
+    background: var(--cream);
+  }
+
+  .banner {
+    display: inline-block;
+    background: var(--ribbon);
+    border: 1px solid var(--cream);
+    box-shadow: 0 0 0 5px var(--ribbon), 0 0 0 6px var(--cream);
+    padding: 12px 26px;
+    margin: 6px;
+  }
+
+  .banner h2 {
+    color: var(--cream);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 36px);
+  }
+
+  .about-grid .frame {
+    background: rgb(38 53 90 / .35);
+  }
+
+  .about-grid h3 {
+    font-size: clamp(18px, 2vw, 22px);
+    letter-spacing: var(--track);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .about-grid p {
+    color: #e9dcc8;
+    max-width: 62ch;
+  }
+
+  .about-grid .fact {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    font-family: var(--f-display);
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--bulb);
+  }
+
+  @media (max-width: 760px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* admission tickets */
+  .tickets {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .tk {
+    --hole: 14px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    align-items: stretch;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 112px;
+    -webkit-mask: radial-gradient(circle var(--hole) at 88px 0, transparent 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--hole) at 88px 100%, transparent 98%, #000) bottom / 100% 51% no-repeat;
+    mask: radial-gradient(circle var(--hole) at 88px 0, transparent 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--hole) at 88px 100%, transparent 98%, #000) bottom / 100% 51% no-repeat;
+  }
+
+  .tk .stub {
+    display: grid;
+    place-items: center;
+    border-right: 2px dashed rgb(42 31 26 / .35);
+    background: var(--ribbon);
+    color: var(--cream);
+  }
+
+  .tk .stub span {
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: .3em;
+  }
+
+  .tk .body {
+    padding: 18px 22px;
+    display: grid;
+    align-content: center;
+    gap: 4px;
+  }
+
+  .tk .body b {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.3;
+  }
+
+  .tk .body small {
+    font-size: 15px;
+    color: #5b4a40;
+  }
+
+  @media (max-width: 760px) {
+    .tickets {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* flow with coins */
+  .quote {
+    text-align: center;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: clamp(20px, 3vw, 30px);
+    letter-spacing: .08em;
+    margin: 0 auto clamp(30px, 5vw, 50px);
+    max-width: 36ch;
+    text-wrap: balance;
+  }
+
+  .flow {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 860px;
+    display: grid;
+    gap: 22px;
+    position: relative;
+  }
+
+  .flow::before {
+    content: "";
+    position: absolute;
+    left: 48px;
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+    background: repeating-linear-gradient(var(--cream-dim) 0 6px, transparent 6px 12px);
+  }
+
+  .flow li {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: clamp(14px, 3vw, 30px);
+    align-items: center;
+  }
+
+  .coin {
+    position: relative;
+    width: 96px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: #5a3d07;
+    background: radial-gradient(circle at 34% 30%, #fff3c4, #f2c96a 28%, #c99a2e 62%, #8f6a17 100%);
+    box-shadow: inset 0 0 0 5px rgb(255 240 190 / .45), inset 0 0 0 7px rgb(120 84 14 / .5), 0 6px 18px rgb(0 0 0 / .45);
+  }
+
+  .coin.silver {
+    color: #3a4150;
+    background: radial-gradient(circle at 34% 30%, #ffffff, #dfe4ec 28%, #a9b1bf 62%, #6e7686 100%);
+    box-shadow: inset 0 0 0 5px rgb(255 255 255 / .5), inset 0 0 0 7px rgb(70 78 92 / .45), 0 6px 18px rgb(0 0 0 / .45);
+  }
+
+  .coin b {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .coin small {
+    display: block;
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 9px;
+    letter-spacing: .2em;
+    margin-top: 2px;
+  }
+
+  .flow .card {
+    background: var(--cream);
+    color: var(--ink);
+    padding: 20px 24px;
+    display: grid;
+    gap: 4px;
+  }
+
+  .flow .card .k {
+    font-family: var(--f-display);
+    font-size: 11px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--ribbon);
+    font-weight: 600;
+  }
+
+  .flow .card h3 {
+    font-weight: 600;
+    font-size: clamp(19px, 2.2vw, 24px);
+  }
+
+  .flow .card p {
+    color: #4d3f36;
+  }
+
+  @media (max-width: 560px) {
+    .flow li {
+      grid-template-columns: 64px 1fr;
+    }
+
+    .coin {
+      width: 64px;
+    }
+
+    .coin b {
+      font-size: 22px;
+    }
+
+    .coin small {
+      font-size: 7px;
+    }
+
+    .flow::before {
+      left: 32px;
+    }
+  }
+
+  /* red panel */
+  .panel {
+    background: var(--cream);
+    padding: 12px;
+    box-shadow: 0 30px 60px -20px rgb(0 0 0 / .6);
+  }
+
+  .panel>div {
+    background: var(--ribbon);
+    padding: clamp(24px, 4vw, 44px);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(24px, 4vw, 52px);
+    align-items: center;
+  }
+
+  .why-grid .lead h2 {
+    font-size: clamp(26px, 3.6vw, 40px);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .why-grid .lead p {
+    font-family: var(--f-display);
+    font-size: clamp(15px, 1.6vw, 18px);
+    letter-spacing: .14em;
+    margin-top: 12px;
+    color: var(--cream-dim);
+  }
+
+  .checks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  .checks li {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 14px;
+    align-items: baseline;
+    font-size: 18px;
+    color: var(--cream);
+  }
+
+  .checks li::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--cream);
+    rotate: 45deg;
+    translate: 4px -1px;
+  }
+
+  @media (max-width: 760px) {
+    .why-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* sponsors */
+  .spons-intro {
+    max-width: 62ch;
+    margin: 0 auto clamp(28px, 4vw, 44px);
+    text-align: center;
+    color: #e9dcc8;
+    font-size: 18px;
+  }
+
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: clamp(48px, 7vw, 80px);
+  }
+
+  .benefits div {
+    border: 1px solid rgb(246 230 207 / .35);
+    padding: 20px 20px 22px;
+    display: grid;
+    gap: 10px;
+    background: rgb(38 53 90 / .3);
+  }
+
+  .benefits svg {
+    width: 30px;
+    height: 30px;
+    color: var(--bulb);
+  }
+
+  .benefits b {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: .02em;
+  }
+
+  @media (max-width: 860px) {
+    .benefits {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .benefits {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .title-sp {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(40px, 7vw, 90px) clamp(24px, 6vw, 80px);
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  .title-sp::before,
+  .title-sp::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    pointer-events: none;
+  }
+
+  .title-sp::before {
+    width: 100%;
+    height: 2px;
+    background: var(--cream);
+    opacity: .6;
+  }
+
+  .title-sp::after {
+    width: 16px;
+    height: 16px;
+    background: var(--bulb);
+    rotate: 45deg;
+    box-shadow: 0 0 18px var(--bulb);
+  }
+
+  .tier {
+    position: relative;
+    z-index: 1;
+    background: var(--cream);
+    color: var(--ink);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 220px;
+  }
+
+  .tier h3 {
+    background: var(--ribbon);
+    color: var(--cream);
+    margin: 8px 8px 0;
+    padding: 10px 12px;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .tier div {
+    padding: 18px 20px;
+    display: grid;
+    align-content: center;
+    gap: 8px;
+    color: #5b4a40;
+  }
+
+  @media (max-width: 640px) {
+    .title-sp {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .title-sp::before,
+    .title-sp::after {
+      display: none;
+    }
+  }
+
+  .ph {
+    font-family: var(--f-display);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ribbon);
+    border: 1px dashed currentColor;
+    padding: 3px 8px;
+    justify-self: start;
+  }
+
+  .logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+  }
+
+  .logos div {
+    aspect-ratio: 3 / 2;
+    border: 1px dashed rgb(246 230 207 / .4);
+    display: grid;
+    place-items: center;
+    font-family: var(--f-display);
+    font-size: 12px;
+    letter-spacing: .2em;
+    color: var(--cream-dim);
+    text-transform: uppercase;
+  }
+
+  .sub-title {
+    text-align: center;
+    font-family: var(--f-display);
+    font-size: 14px;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    color: var(--bulb);
+    margin: clamp(50px, 7vw, 80px) 0 22px;
+  }
+
+  /* gallery */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  .snap {
+    background: var(--cream);
+    padding: 10px 10px 34px;
+    rotate: var(--r, 0deg);
+    box-shadow: 0 16px 30px rgb(0 0 0 / .45);
+    transition: rotate .3s ease, translate .3s ease;
+  }
+
+  .snap:hover {
+    rotate: 0deg;
+    translate: 0 -4px;
+  }
+
+  .snap div {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(#2a3a62, #1a2440);
+    display: grid;
+    place-items: center;
+    color: var(--cream-dim);
+    font-family: var(--f-display);
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+
+  .snap p {
+    font-family: var(--f-display);
+    font-style: italic;
+    color: var(--ink);
+    text-align: center;
+    margin-top: 8px;
+    font-size: 15px;
+  }
+
+  @media (max-width: 760px) {
+    .gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* contacts */
+  .contacts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .ct {
+    background: var(--cream);
+    color: var(--ink);
+    padding: 18px 20px;
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .ct b {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 19px;
+  }
+
+  .ct .row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .ct .row span {
+    font-size: 15.5px;
+    overflow-wrap: anywhere;
+    min-width: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .copy {
+    margin-left: auto;
+    flex: none;
+    font-family: var(--f-display);
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid rgb(42 31 26 / .35);
+    color: var(--ink);
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+
+  .copy:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  @media (max-width: 760px) {
+    .contacts {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  footer {
+    position: relative;
+    padding-block: 60px 50px;
+    text-align: center;
+    background: linear-gradient(var(--night-deep), #0f1526);
+    overflow: hidden;
+  }
+
+  footer .inner {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+  }
+
+  footer .fm {
+    display: grid;
+    justify-items: center;
+  }
+
+  footer .fm img {
+    width: 92px;
+    margin-bottom: -4px;
+  }
+
+  footer .fm strong {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 1;
+  }
+
+  footer .ribbon {
+    width: 280px;
+    margin-top: 6px;
+  }
+
+  footer .ribbon span {
+    font-size: 13px;
+  }
+
+  footer p {
+    font-family: var(--f-display);
+    font-size: 11px;
+    letter-spacing: .3em;
+    color: var(--cream-dim);
+  }
+
+  footer .bush-l,
+  footer .bush-r {
+    position: absolute;
+    bottom: 0;
+    width: 90px;
+    opacity: .8;
+  }
+
+  footer .bush-l {
+    left: 0;
+  }
+
+  footer .bush-r {
+    right: 0;
+  }
+
+  #snow {
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .glow {
+      animation: none;
+    }
+
+    #snow {
+      display: none;
+    }
+
+    .snap {
+      transition: none;
+    }
+  }
+</style>
+
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<nav class="nav gut" aria-label="Sections">
+  <div class="inner">
+    <a class="brand" href="#top"><img src="art/tent-top.webp" alt="">SITank 3.0 3.0</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#event">The Event</a></li>
+      <li><a href="#flow">Flow</a></li>
+      <li><a href="#why">Why SITank 3.0</a></li>
+      <li><a href="#sponsor">Sponsor</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="cta" href="#contact">Pitch your startup</a>
+  </div>
+</nav>
+
+<header class="hero gut" id="top">
+  <div class="stars"></div>
+  <img class="deco branch-l" src="art/branch-l.webp" alt="">
+  <img class="deco branch-r" src="art/branch-r.webp" alt="">
+  <img class="deco bulbs-l glow" src="art/bulbs-l.webp" alt="">
+  <img class="deco bulbs-r glow slow" src="art/bulbs-r.webp" alt="">
+  <div class="frame">
+    <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span
+      class="corner br"></span>
+
+    <div class="hero-copy">
+      <p class="presents">Entrepreneurship Cell, SIT Nagpur<i>Presents</i></p>
+      <div class="wordmark">
+        <img src="art/tent-top.webp" alt="">
+        <h1><span class="flake" aria-hidden="true">&#x2744;</span>SITank 3.0<span class="flake"
+            aria-hidden="true">&#x2744;</span></h1>
+      </div>
+      <div class="ribbon"><span>WINTER CARNIVAL</span></div>
+      <p class="tagline">FROM PITCH TO POWER</p>
+    </div>
+    <div class="scene" aria-hidden="true">
+      <div class="field"></div>
+      <img class="fairy glow" data-d="6" src="art/fairy.webp" alt="">
+      <img class="tent-grey" data-d="4" src="art/tent-grey.webp" alt="">
+      <img class="tent-cream" data-d="7" src="art/tent-cream.webp" alt="">
+      <img class="wheel" data-d="9" src="art/wheel.webp" alt="">
+      <img class="bigtop" data-d="12" src="art/bigtop.webp" alt="">
+      <img class="stall" data-d="16" src="art/stall.webp" alt="">
+      <img class="bush-l" data-d="22" src="art/bush-l.webp" alt="">
+      <img class="bush-r" data-d="22" src="art/bush-r.webp" alt="">
+    </div>
+    <div class="ticket">
+      <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <rect x="3.5" y="5" width="17" height="15" rx="2" />
+          <path d="M3.5 9.5h17M8 3v4M16 3v4M8 13h2M12 13h2M16 13h0M8 16.5h2M12 16.5h2" />
+        </svg>4<sup>th</sup> &#x2013; 6<sup>th</sup> February, 2027</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z" />
+          <circle cx="12" cy="9.8" r="2.4" />
+        </svg>SIT Nagpur</span>
+    </div>
+    <div class="countdown" id="countdown" aria-label="Time until the carnival opens">
+      <div><b id="cd-d">--</b><span>DAYS</span></div>
+      <div><b id="cd-h">--</b><span>HOURS</span></div>
+      <div><b id="cd-m">--</b><span>MINUTES</span></div>
+      <div><b id="cd-s">--</b><span>SECONDS</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="band gut" id="about">
+    <div class="inner">
+      <div class="sec-head">
+        <p class="eyebrow">Behind the big top</p>
+        <h2>About</h2>
+        <div class="rule"><i></i></div>
+      </div>
+      <div class="about-grid">
+        <article class="frame">
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span
+            class="corner br"></span>
+          <h3>About SIT</h3>
+          <p>Symbiosis Institute of Technology (SIT), Nagpur is a premier engineering institute established in 2021
+            under Symbiosis International (Deemed) University, Pune. The institute is committed to delivering
+            industry-oriented education, fostering innovation, and nurturing future-ready engineers.</p>
+          <p class="fact"><span>Est. 2021</span><span>Symbiosis International (Deemed) University</span></p>
+        </article>
+        <article class="frame">
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span
+            class="corner br"></span>
+          <h3>About SITank 3.0</h3>
+          <p>SITank 3.0 is the flagship startup and innovation platform of the Entrepreneurship Cell, SIT Nagpur.
+            Inspired
+            by real-world venture capital ecosystems, SITank 3.0 empowers students to ideate, validate, build, and pitch
+            startup ideas with strong market potential.</p>
+          <p class="fact"><span>Ideate</span><span>Validate</span><span>Build</span><span>Pitch</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt gut" id="event">
+    <div class="inner">
+      <div class="sec-head">
+        <p class="eyebrow">The event</p>
+        <h2>Pitch to Win</h2>
+        <div class="rule"><i></i></div>
+      </div>
+      <div class="tickets">
+        <div class="tk">
+          <div class="stub"><span>ADMIT ONE</span></div>
+          <div class="body"><b>Present your startup to a panel of judges</b><small>Your idea, your numbers, one room to
+              convince.</small></div>
+        </div>
+        <div class="tk">
+          <div class="stub"><span>ADMIT ONE</span></div>
+          <div class="body"><b>Focus on market fit, scalability &amp; revenue</b><small>The questions real investors ask
+              first.</small></div>
+        </div>
+        <div class="tk">
+          <div class="stub"><span>ADMIT ONE</span></div>
+          <div class="body"><b>Real VC-style pitching experience</b><small>Pitch the way founders do in front of a
+              fund.</small></div>
+        </div>
+        <div class="tk">
+          <div class="stub"><span>ADMIT ONE</span></div>
+          <div class="body"><b>Opportunity for mentorship &amp; investment exposure</b><small>Meet the people who can
+              help you take it further.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band gut" id="flow">
+    <div class="inner">
+      <div class="sec-head">
+        <p class="eyebrow">Event flow</p>
+        <h2>From Stall to Stage</h2>
+        <div class="rule"><i></i></div>
+      </div>
+      <p class="quote">&#x201C;Sell the dream. Convince the room.&#x201D;</p>
+      <ol class="flow">
+        <li>
+          <div class="coin silver" aria-hidden="true">
+            <div><b>1</b><small>ROUND</small></div>
+          </div>
+          <div class="card"><span class="k">Round 1</span>
+            <h3>Exhibition Round</h3>
+            <p>Showcase your startup through stalls and live interaction with visitors and judges.</p>
+          </div>
+        </li>
+        <li>
+          <div class="coin silver" aria-hidden="true">
+            <div><b>2</b><small>ROUND</small></div>
+          </div>
+          <div class="card"><span class="k">Round 2</span>
+            <h3>Jury Pitching Round</h3>
+            <p>Pitch your business to the jury like a real founder.</p>
+          </div>
+        </li>
+        <li>
+          <div class="coin" aria-hidden="true">
+            <div><b>&#x2605;</b><small>FINALE</small></div>
+          </div>
+          <div class="card"><span class="k">Finale</span>
+            <h3>Winners Announced</h3>
+            <p>Best ideas. Best execution. Best storytellers.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band alt gut" id="why">
+    <div class="inner">
+      <div class="panel">
+        <div class="why-grid">
+          <div class="lead">
+            <h2>Why SITank 3.0!</h2>
+            <p>Why you should be here?</p>
+          </div>
+          <ul class="checks">
+            <li>Learn how startups actually raise money</li>
+            <li>Understand markets, users &amp; numbers</li>
+            <li>Get mentored by industry &amp; startup experts</li>
+            <li>Build confidence in pitching &amp; storytelling</li>
+            <li>Compete for high-value rewards</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band gut" id="sponsor">
+    <div class="inner">
+      <div class="sec-head">
+        <p class="eyebrow">For partners</p>
+        <div class="banner">
+          <h2>Fuel Innovation</h2>
+        </div>
+      </div>
+      <p class="spons-intro">Partnering with SITank 3.0 connects sponsors with emerging entrepreneurial talent while
+        amplifying brand visibility in an innovation-driven ecosystem.</p>
+      <div class="benefits">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z" />
+          </svg><b>Direct access to high-potential talent</b></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="8" cy="9" r="3" />
+            <circle cx="16" cy="9" r="3" />
+            <path d="M3 19c.8-3 2.8-4.5 5-4.5s4.2 1.5 5 4.5M11 19c.8-3 2.8-4.5 5-4.5s4.2 1.5 5 4.5" />
+          </svg><b>Meaningful engagement &amp; networking</b></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="8" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="12" cy="12" r="1" />
+          </svg><b>Targeted brand visibility</b></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M4 10v4l11 5V5L4 10zM15 9a3 3 0 0 1 0 6M7 14.5l1.5 5h2.5l-1.4-4.3" />
+          </svg><b>Digital &amp; on-ground promotion</b></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M5 20V10M10 20V6M15 20v-8M20 20V4" />
+          </svg><b>Thought leadership &amp; industry presence</b></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" />
+          </svg><b>Support innovation &amp; entrepreneurship</b></div>
+      </div>
+
+      <div class="sec-head">
+        <div class="banner">
+          <h2>Title Sponsor</h2>
+        </div>
+      </div>
+      <div class="title-sp">
+        <article class="tier">
+          <h3>Digital &amp; Media Visibility</h3>
+          <div><span class="ph">Details to be announced</span></div>
+        </article>
+        <article class="tier">
+          <h3>On-Ground Branding</h3>
+          <div><span class="ph">Details to be announced</span></div>
+        </article>
+        <article class="tier">
+          <h3>Engagement &amp; Participation</h3>
+          <div><span class="ph">Details to be announced</span></div>
+        </article>
+        <article class="tier">
+          <h3>Merchandise &amp; Branding</h3>
+          <div><span class="ph">Details to be announced</span></div>
+        </article>
+      </div>
+
+      <p class="sub-title">Previous sponsors</p>
+      <div class="logos">
+        <div>[Logo]</div>
+        <div>[Logo]</div>
+        <div>[Logo]</div>
+        <div>[Logo]</div>
+        <div>[Logo]</div>
+        <div>[Logo]</div>
+      </div>
+      <p style="text-align:center;margin-top:28px"><a class="cta" href="#contact">Become a sponsor</a></p>
+    </div>
+  </section>
+
+  <section class="band alt gut" id="gallery">
+    <div class="inner">
+      <div class="sec-head">
+        <div class="banner">
+          <h2>Gallery</h2>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="snap" style="--r:-2.5deg; margin:0">
+          <div>[Photo]</div>
+          <p>Exhibition stalls</p>
+        </figure>
+        <figure class="snap" style="--r:1.8deg; margin:0">
+          <div>[Photo]</div>
+          <p>Jury pitching</p>
+        </figure>
+        <figure class="snap" style="--r:-1.2deg; margin:0">
+          <div>[Photo]</div>
+          <p>The big reveal</p>
+        </figure>
+        <figure class="snap" style="--r:2.2deg; margin:0">
+          <div>[Photo]</div>
+          <p>Mentor sessions</p>
+        </figure>
+        <figure class="snap" style="--r:-1.8deg; margin:0">
+          <div>[Photo]</div>
+          <p>Carnival nights</p>
+        </figure>
+        <figure class="snap" style="--r:1.2deg; margin:0">
+          <div>[Photo]</div>
+          <p>Winners</p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band gut" id="contact">
+    <div class="inner">
+      <div class="sec-head">
+        <div class="banner">
+          <h2>Contact Us</h2>
+        </div>
+        <p class="eyebrow" style="margin-top:14px">Entrepreneurship Cell, SIT Nagpur</p>
+      </div>
+      <div class="contacts" id="contacts"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="gut">
+  <img class="bush-l" src="art/bush-l.webp" alt=""><img class="bush-r" src="art/bush-r.webp" alt="">
+  <div class="inner">
+    <div class="fm"><img src="art/tent-top.webp" alt=""><strong>SITank 3.0</strong></div>
+    <div class="ribbon"><span>WINTER CARNIVAL</span></div>
+    <p>FROM PITCH TO POWER &#xb7; 4&#x2013;6 FEB 2027 &#xb7; SIT NAGPUR</p>
+  </div>
+</footer>
+
+<script>
+  (() => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // contacts
+    const PEOPLE = [
+      ['Nehal Saad', '+91 74995 16411', 'nehal.saad.batch2025@sitnagpur.siu.edu.in'],
+      ['Siddhesh Thakur', '+91 99305 77000', 'siddhesh.thakur.batch2025@sitnagpur.siu.edu.in'],
+      ['Parth Tiwaskar', '+91 91123 74118', 'parth.tiwaskar.batch2024@sitnagpur.siu.edu.in'],
+      ['Aaditya Wanjari', '+91 75587 83048', 'aaditya.wanjari.batch2025@sitnagpur.siu.edu.in'],
+      ['Laksh Rathi', '+91 95296 41866', 'laksh.rathi.batch2026@sitnagpur.siu.edu.in'],
+      ['Anirudh Jajoo', '+91 86686 93168', 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in']
+    ];
+    const box = document.getElementById('contacts');
+    PEOPLE.forEach(([n, ph, em]) => {
+      const c = document.createElement('div'); c.className = 'ct';
+      c.innerHTML = `<b>${n}</b><div class="row"><span>${ph}</span><button class="copy" type="button" data-v="${ph}">Copy</button></div><div class="row"><span>${em}</span><button class="copy" type="button" data-v="${em}">Copy</button></div>`;
+      box.appendChild(c);
+    });
+    box.addEventListener('click', e => {
+      const b = e.target.closest('.copy'); if (!b) return;
+      const done = t => { b.textContent = t; setTimeout(() => b.textContent = 'Copy', 1400); };
+      const fallback = () => { const s = getSelection(), r = document.createRange(); r.selectNodeContents(b.previousElementSibling); s.removeAllRanges(); s.addRange(r); done('Selected'); };
+      try { navigator.clipboard.writeText(b.dataset.v).then(() => done('Copied'), fallback); } catch { fallback(); }
+    });
+
+    // countdown to 4 Feb 2027, 09:00 IST
+    const T = Date.parse('2027-02-04T09:00:00+05:30');
+    const el = id => document.getElementById(id), pad = n => String(n).padStart(2, '0');
+    const tick = () => {
+      let s = Math.max(0, Math.floor((T - Date.now()) / 1000));
+      if (s === 0) { el('countdown').innerHTML = '<div><b>The carnival is live</b></div>'; return; }
+      el('cd-d').textContent = Math.floor(s / 86400); s %= 86400;
+      el('cd-h').textContent = pad(Math.floor(s / 3600)); s %= 3600;
+      el('cd-m').textContent = pad(Math.floor(s / 60)); el('cd-s').textContent = pad(s % 60);
+    };
+    tick(); setInterval(tick, 1000);
+
+    // active nav link
+    const links = [...document.querySelectorAll('.nav ul a')];
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main section[id]').forEach(s => io.observe(s));
+
+    if (reduce) return;
+
+    // hero parallax: nearer layers move more with the pointer and with scroll
+    const layers = [...document.querySelectorAll('.scene [data-d]')];
+    let mx = 0, my = 0;
+    addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; move(); }, { passive: true });
+    addEventListener('scroll', move, { passive: true });
+    function move() {
+      const sy = Math.min(scrollY, 900);
+      layers.forEach(l => { const d = +l.dataset.d; l.style.transform = `translate(${(-mx * d).toFixed(1)}px, ${(-my * d * .5 - sy * d * .012).toFixed(1)}px)`; });
+    }
+
+    // snowfall
+    const cv = document.getElementById('snow'), x = cv.getContext('2d');
+    let W, H, flakes = [];
+    const size = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; const n = Math.round(W * H / 16000); flakes = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, r: .6 + Math.random() * 1.8, v: .3 + Math.random() * .8, a: Math.random() * 6 })); };
+    size(); addEventListener('resize', size);
+    (function f() {
+      x.clearRect(0, 0, W, H); x.fillStyle = 'rgba(246,236,222,.75)';
+      for (const p of flakes) { p.y += p.v; p.a += .01; p.x += Math.sin(p.a) * .35; if (p.y > H + 4) { p.y = -4; p.x = Math.random() * W; } x.beginPath(); x.arc(p.x, p.y, p.r, 0, 6.283); x.fill(); }
+      requestAnimationFrame(f);
+    })();
+  })();
+</script>
