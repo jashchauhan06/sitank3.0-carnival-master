@@ -273,7 +273,7 @@ export default function App() {
                       <li key={f.title} aria-hidden={activeFlowStep !== index}>
                         <div className={'coin' + (f.metal === 'silver' ? ' silver' : '')} aria-hidden="true"><div><b><NumericText value={f.coin} /></b><small>{f.label}</small></div></div>
                         <div className="tk flow-ticket">
-                          <div className="stub"><span>Admit one</span></div>
+                          <div className="stub"><span>SITank 3.0</span></div>
                           <div className="body"><span className="k"><NumericText value={f.kicker} /></span><h3><NumericText value={f.title} /></h3><p><NumericText value={f.body} /></p></div>
                         </div>
                       </li>
