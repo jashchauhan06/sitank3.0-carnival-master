@@ -388,3 +388,70 @@ body a, body button, body [role='button'], body input[type='button'], body input
   .countdown b { font-size: 30px; }
   .countdown span { font-size: 10px; margin-top: 4px; }
 }
+
+/* ---------- phone layout ---------- */
+@media (max-width: 760px) {
+  .hero .frame {
+    width: 100%;
+    max-width: 100%;
+    min-height: calc(100svh - 76px);
+    margin: 0 auto;
+    padding: 0;
+  }
+  .hero-copy { gap: 7px; padding: clamp(28px, 6vh, 48px) 4px 0; }
+  .presents { max-width: 100%; font-size: clamp(12px, 3.4vw, 15px); line-height: 1.35; letter-spacing: .12em; }
+  .presents i { gap: 9px; }
+  .presents i::before, .presents i::after { width: 34px; }
+  .wordmark { max-width: 100%; margin-top: 3px; }
+  .wordmark img { width: clamp(76px, 21vw, 104px); margin-bottom: -2px; }
+  .wordmark h1 { max-width: 100%; justify-content: center; gap: .08em; font-size: clamp(36px, 10.2vw, 68px); line-height: .98; letter-spacing: -.035em; }
+  .wordmark h1 .wordmark-title { white-space: nowrap; }
+  .wordmark h1 .flake { font-size: .18em; }
+  .ribbon { width: min(100%, 400px); margin-top: 7px; }
+  .ribbon span { font-size: clamp(11px, 3vw, 16px); letter-spacing: .17em; padding-left: .17em; }
+  .tagline { gap: 8px; max-width: 100%; margin-top: 7px; font-size: clamp(10px, 2.7vw, 13px); line-height: 1.35; letter-spacing: .15em; }
+  .tagline::before, .tagline::after { width: clamp(14px, 4vw, 26px); }
+  .deco.branch-l, .deco.branch-r { width: clamp(76px, 22vw, 120px); }
+  .deco.bulbs-l, .deco.bulbs-r { width: clamp(64px, 19vw, 102px); }
+  .scene { flex: 1 1 auto; width: 100%; min-height: clamp(178px, 26vh, 230px); aspect-ratio: auto; }
+  .scene .field { inset-inline: -16px; }
+  .scene .wheel { width: 22%; right: 2%; bottom: 12%; }
+  .scene .bigtop { width: 39%; left: 30.5%; bottom: 12%; }
+  .scene .stall { width: 18%; left: -1%; bottom: 7%; }
+  .scene .tent-cream { width: 17%; left: 15%; bottom: 15%; }
+  .scene .tent-grey { width: 13%; left: 66%; bottom: 18%; }
+  .scene .fairy { width: 62%; left: 19%; bottom: 53%; }
+  .ticket {
+    width: calc(100% - 16px);
+    max-width: 390px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 7px;
+    margin: 0 auto 12px;
+    padding: 10px 12px;
+    border-radius: 18px;
+    font-size: clamp(12px, 3.4vw, 14px);
+  }
+  .ticket .it { justify-content: center; gap: 7px; white-space: nowrap; }
+  .ticket .sep { display: none; }
+  .ticket svg { width: 17px; height: 17px; }
+  .countdown {
+    width: calc(100% - 16px);
+    max-width: 390px;
+    justify-content: space-around;
+    gap: clamp(4px, 2vw, 10px);
+    margin: 0 auto 12px;
+    padding: 9px 7px;
+  }
+  .hero .countdown div { min-width: 0; }
+  .countdown b { font-size: clamp(23px, 7vw, 30px); }
+  .countdown span { font-size: clamp(8px, 2.3vw, 10px); letter-spacing: .2em; margin-top: 4px; }
+  .hero-cta { width: min(280px, calc(100% - 32px)); min-height: 46px; margin: 0 auto 16px; padding-inline: 18px; font-size: 11px; }
+}
+
+@media (max-width: 380px) {
+  .hero-copy { padding-top: 24px; }
+  .wordmark h1 { font-size: clamp(33px, 9.8vw, 38px); }
+  .ticket { font-size: 12px; padding-inline: 8px; }
+  .countdown { padding-inline: 5px; }
+}

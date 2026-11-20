@@ -110,8 +110,8 @@ export default function App() {
   const active = useActiveSection();
   const activeFlowStep = useFlowStep();
   const [loading, setLoading] = useState(true);
-  const [navExpanded, setNavExpanded] = useState(true);
-  const navExpandedRef = useRef(true);
+  const [navExpanded, setNavExpanded] = useState(() => window.matchMedia('(max-width: 900px)').matches === false);
+  const navExpandedRef = useRef(navExpanded);
   const collapsePosition = useRef(0);
 
   useEffect(() => {
