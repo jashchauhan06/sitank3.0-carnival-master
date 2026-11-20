@@ -94,19 +94,10 @@ export const CONTACTS: readonly Contact[] = [
   { name: 'Aaditya Wanjari', role: 'Co-Coordinator', phone: '+91 7558783048', email: 'aaditya.wanjari.batch2025@sitnagpur.siu.edu.in', photo: '/art/optimized/team/Aditya wanjari.webp' },
   { name: 'Laksh Rathi', role: 'Co-Coordinator', phone: '+91 9529641866', email: 'laksh.rathi.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/Laksh Rathi.webp' },
   { name: 'Anirudh Jajoo', role: 'Co-Coordinator', phone: '+91 8668693168', email: 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/Anirudh Jajoo.webp' },
-];
-
-export interface TeamMember { name: string; role: string; photo: string; temporaryPhoto?: boolean }
-export const TEAM_LEADERS: readonly TeamMember[] = [
-  { name: 'Prathmesh Raipurkar', role: 'President', photo: '/art/optimized/team/prathmesh-raipurkar.webp' },
-  { name: 'Harsh Kumar', role: 'Vice President (Technical)', photo: '/art/optimized/team/harsh-kumar.webp' },
-  { name: 'Swanandi Thaker', role: 'Vice President (Co-Curricular)', photo: '/art/optimized/team/swanandi-thaker.webp' },
-  { name: 'Heena Khilnani', role: 'Sponsorship', photo: '/art/optimized/team/heena-khilnani.webp' },
-  { name: 'Jash Chauhan', role: 'Web & IT', photo: '/art/optimized/team/jash.webp' },
-  { name: 'Ansh Sonkusare', role: 'Web & IT', photo: '/art/optimized/team/no-image.png' },
+  { name: 'Jash Chauhan', role: 'Web & IT', phone: '+91 8668693168', email: 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/jash.webp' },
+  { name: 'Ansh Sonkusare', role: 'Web & IT', phone: '+91 8668693168', email: 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/no-image.png' }
 ];
 
 export const TEAM: readonly TeamMember[] = [
-  ...TEAM_LEADERS,
   ...CONTACTS.map(({ name, photo, role }) => ({ name, role, photo })),
 ];
