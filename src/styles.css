@@ -455,3 +455,8 @@ body a, body button, body [role='button'], body input[type='button'], body input
   .ticket { font-size: 12px; padding-inline: 8px; }
   .countdown { padding-inline: 5px; }
 }
+
+/* Extend the mobile canvas into the extra area revealed by pinch zooming out. */
+@media (max-width: 760px) {
+  html, body, #root, .site-shell { min-width: max(100vw, var(--visible-viewport-width, 100vw)); }
+}
