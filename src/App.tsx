@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState, type MouseEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from 'react';
 import Hero from './Hero';
-import { Corners, SecHead, Icon, Snow, NumericText } from './bits';
-import { EVENT, NAV, ABOUT, PITCH, FLOW, WHY, SPONSOR_INTRO, BENEFITS, TITLE_TIERS, GALLERY, CONTACTS } from './content';
+import { Corners, SecHead, Snow, NumericText } from './bits';
+import { EVENT, NAV, ABOUT, PITCH, FLOW, WHY, TITLE_TIERS, PAST_SPONSORS, GALLERY, CONTACTS, TEAM } from './content';
+
+const CONTACT_EMAIL = 'ecell@sitnagpur.siu.edu.in';
 
 function useActiveSection() {
   const [active, setActive] = useState('');
@@ -13,83 +15,100 @@ function useActiveSection() {
   return active;
 }
 
-function WinterScrollbar() {
-  const [metrics, setMetrics] = useState({ top: 0, height: 48, scroll: 0, maxScroll: 0 });
-  const dragOffset = useRef(0);
-
+function useFlowStep() {
+  const [activeStep, setActiveStep] = useState(0);
   useEffect(() => {
-    const update = () => {
-      const viewport = window.innerHeight;
-      const maxScroll = Math.max(0, document.documentElement.scrollHeight - viewport);
-      const height = Math.min(viewport, Math.max(42, viewport * viewport / Math.max(viewport, document.documentElement.scrollHeight)));
-      const maxTop = Math.max(0, viewport - height);
-      setMetrics({ top: maxScroll ? window.scrollY / maxScroll * maxTop : 0, height, scroll: window.scrollY, maxScroll });
+    const track = document.querySelector<HTMLElement>('#flow .flow-track');
+    const stage = document.querySelector<HTMLElement>('#flow .flow-stage');
+    if (!track || !stage) return;
+    let previous = -1;
+    const updateStep = () => {
+      const stickyTop = Number.parseFloat(getComputedStyle(stage).top) || 0;
+      const travel = Math.max(1, track.offsetHeight - stage.offsetHeight);
+      const progress = Math.max(0, Math.min(0.999999, (stickyTop - track.getBoundingClientRect().top) / travel));
+      const next = Math.min(2, Math.floor(progress * 3));
+      if (next !== previous) {
+        previous = next;
+        setActiveStep(next);
+      }
     };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    const observer = new ResizeObserver(update);
-    observer.observe(document.documentElement);
+    updateStep();
+    window.addEventListener('scroll', updateStep, { passive: true });
+    window.addEventListener('resize', updateStep);
     return () => {
-      window.removeEventListener('scroll', update);
-      window.removeEventListener('resize', update);
-      observer.disconnect();
+      window.removeEventListener('scroll', updateStep);
+      window.removeEventListener('resize', updateStep);
     };
   }, []);
-
-  const dragTo = (clientY: number) => {
-    const maxTop = Math.max(1, window.innerHeight - metrics.height);
-    const top = Math.min(maxTop, Math.max(0, clientY - dragOffset.current));
-    window.scrollTo(0, top / maxTop * metrics.maxScroll);
-  };
-
-  return <div
-    className="winter-scroll-thumb"
-    role="scrollbar"
-    aria-label="Page scroll"
-    aria-controls="root"
-    aria-orientation="vertical"
-    aria-valuemin={0}
-    aria-valuemax={Math.round(metrics.maxScroll)}
-    aria-valuenow={Math.round(metrics.scroll)}
-    tabIndex={0}
-    style={{ top: metrics.top, height: metrics.height }}
-    onPointerDown={event => {
-      dragOffset.current = event.clientY - event.currentTarget.getBoundingClientRect().top;
-      event.currentTarget.setPointerCapture(event.pointerId);
-      event.currentTarget.classList.add('is-dragging');
-    }}
-    onPointerMove={event => { if (event.currentTarget.hasPointerCapture(event.pointerId)) dragTo(event.clientY); }}
-    onPointerUp={event => { event.currentTarget.releasePointerCapture(event.pointerId); event.currentTarget.classList.remove('is-dragging'); }}
-    onKeyDown={event => {
-      const step = event.key === 'PageDown' || event.key === 'PageUp' ? window.innerHeight * .9 : 80;
-      if (event.key === 'ArrowDown' || event.key === 'PageDown') window.scrollBy({ top: step, behavior: 'smooth' });
-      else if (event.key === 'ArrowUp' || event.key === 'PageUp') window.scrollBy({ top: -step, behavior: 'smooth' });
-      else if (event.key === 'Home') window.scrollTo({ top: 0, behavior: 'smooth' });
-      else if (event.key === 'End') window.scrollTo({ top: metrics.maxScroll, behavior: 'smooth' });
-      else return;
-      event.preventDefault();
-    }}
-  />;
+  return activeStep;
 }
 
-function CopyButton({ value }: { value: string }) {
-  const [label, setLabel] = useState('Copy');
-  const flash = (t: string) => { setLabel(t); setTimeout(() => setLabel('Copy'), 1400); };
-  const copy = (e: MouseEvent<HTMLButtonElement>) => {
-    const span = e.currentTarget.previousElementSibling;
-    const select = () => {
-      const s = getSelection();
-      if (!span || !s) return;
-      const r = document.createRange(); r.selectNodeContents(span); s.removeAllRanges(); s.addRange(r); flash('Selected');
-    };
-    try { navigator.clipboard.writeText(value).then(() => flash('Copied'), select); } catch { select(); }
+function ContactIcon({ type }: { type: 'location' | 'email' | 'phone' }) {
+  return <div className="contact-icon" aria-hidden="true">
+    <svg className="contact-icon-snow" viewBox="0 0 66 16" preserveAspectRatio="none"><path d="M2 12C12 1 26 6 36 3S56 5 64 12L62 15H4Z" fill="#f3f8ff" /><path d="m14 14 2 8 2-8m30 0 2 7 2-7" fill="#d3e6ff" /></svg>
+    <svg className="contact-icon-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {type === 'location' && <><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></>}
+      {type === 'email' && <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></>}
+      {type === 'phone' && <path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 3a14 14 0 0 1-7-7l3-2-3-6Z" />}
+    </svg>
+  </div>;
+}
+
+function ContactSection() {
+  const sendMessage = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const subject = String(data.get('subject') || 'SITank 3.0 enquiry');
+    const body = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\n\n${data.get('message')}`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
-  return <button className="copy" type="button" onClick={copy}>{label}</button>;
+
+  return <section className="band gut contact-section" id="contact">
+    <div className="inner">
+      <div className="sec-head"><div className="banner"><h2>Contact Us</h2></div><p className="eyebrow" style={{ marginTop: 14 }}>{EVENT.presenter}</p></div>
+      <div className="contact-layout">
+        <div className="contact-info">
+          <div className="contact-item">
+            <ContactIcon type="location" />
+            <div className="contact-copy"><h3>Location</h3><p>Symbiosis Institute of Technology,<br />Nagpur, Maharashtra, India</p></div>
+          </div>
+          <div className="contact-item">
+            <ContactIcon type="email" />
+            <div className="contact-copy"><h3>Email</h3><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></div>
+          </div>
+          <div className="contact-item contact-people">
+            <ContactIcon type="phone" />
+            <div className="contact-copy"><h3>Connect</h3>
+              <ul>{CONTACTS.map(contact => <li key={contact.name}><a href={`tel:${contact.phone.replace(/[^+\d]/g, '')}`}><span>{contact.name}</span><span>{contact.phone}</span></a></li>)}</ul>
+            </div>
+          </div>
+        </div>
+
+        <form className="contact-form-card" onSubmit={sendMessage}>
+          <span className="form-snow-cap" aria-hidden="true" />
+          <span className="form-flake form-flake-left" aria-hidden="true">✳</span>
+          <span className="form-flake form-flake-right" aria-hidden="true">✳</span>
+          <div className="form-fields-row">
+            <div className="contact-field"><label htmlFor="contact-name">Your name</label><input id="contact-name" name="name" type="text" placeholder="Your Name" autoComplete="name" required /></div>
+            <div className="contact-field"><label htmlFor="contact-email">Your email</label><input id="contact-email" name="email" type="email" placeholder="Email ID" autoComplete="email" required /></div>
+          </div>
+          <div className="contact-field"><label htmlFor="contact-subject">Subject</label><input id="contact-subject" name="subject" type="text" placeholder="Subject..." required /></div>
+          <div className="contact-field"><label htmlFor="contact-message">Your message</label><textarea id="contact-message" name="message" placeholder="Write your message here..." rows={5} required /></div>
+          <div className="form-submit-wrap">
+            <span className="submit-holly" aria-hidden="true">❧</span>
+            <button className="contact-submit" type="submit"><span aria-hidden="true">✉</span> Send message</button>
+            <span className="submit-sparkle" aria-hidden="true">✦　·　✧　·　✦</span>
+          </div>
+          <p className="form-helper">Opens your email app to send your message.</p>
+        </form>
+      </div>
+    </div>
+  </section>;
 }
 
 export default function App() {
   const active = useActiveSection();
+  const activeFlowStep = useFlowStep();
   const [navExpanded, setNavExpanded] = useState(true);
   const navExpandedRef = useRef(true);
   const collapsePosition = useRef(0);
@@ -155,14 +174,13 @@ export default function App() {
   return (
     <div className="site-shell" onDragStartCapture={event => event.preventDefault()} onClickCapture={handleSectionNavigation}>
       <Snow />
-      <WinterScrollbar />
       <nav className={`nav ${navExpanded ? 'is-expanded' : 'is-collapsed'}`} aria-label="Sections" onClick={handleNavClick}>
         <div className="inner">
           <a className="brand" href="#top" tabIndex={navExpanded ? 0 : -1}><img src="/art/tent-top.webp" alt="" /><NumericText value={EVENT.name} /></a>
           <ul aria-hidden={!navExpanded}>
             {NAV.map(n => <li key={n.id}><a href={'#' + n.id} aria-current={active === n.id} tabIndex={navExpanded ? 0 : -1}><NumericText value={n.label} /></a></li>)}
           </ul>
-          <a className="cta" href="#contact" tabIndex={navExpanded ? 0 : -1}>Pitch your startup</a>
+          <a className="cta" href="#register-now" tabIndex={navExpanded ? 0 : -1}>Pitch your startup</a>
           <button className="nav-toggle" type="button" aria-label={navExpanded ? 'Collapse navigation' : 'Expand navigation'} aria-expanded={navExpanded} onClick={toggleNav}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">{navExpanded ? <path d="m6 6 12 12M18 6 6 18" /> : <path d="M4 6h16M4 12h16M4 18h16" />}</svg>
           </button>
@@ -180,8 +198,8 @@ export default function App() {
               {ABOUT.map(a => (
                 <article className="frame" key={a.title}>
                   <Corners />
-                    <h3><NumericText value={a.title} /></h3>
-                    <p><NumericText value={a.body} /></p>
+                  <h3><NumericText value={a.title} /></h3>
+                  <p><NumericText value={a.body} /></p>
                   <p className="fact">{a.facts.map(f => <span key={f}><NumericText value={f} /></span>)}</p>
                 </article>
               ))}
@@ -201,17 +219,28 @@ export default function App() {
         </section>
 
         <section className="band gut" id="flow">
-          <div className="inner">
-            <SecHead eyebrow="Event flow" title="From Stall to Stage" />
-            <p className="quote">{'“'}Sell the dream. Convince the room.{'”'}</p>
-            <ol className="flow">
-              {FLOW.map(f => (
-                <li key={f.title}>
-                  <div className={'coin' + (f.metal === 'silver' ? ' silver' : '')} aria-hidden="true"><div><b><NumericText value={f.coin} /></b><small>{f.label}</small></div></div>
-                  <div className="card"><span className="k"><NumericText value={f.kicker} /></span><h3><NumericText value={f.title} /></h3><p><NumericText value={f.body} /></p></div>
-                </li>
-              ))}
-            </ol>
+          <div className="flow-track">
+            <div className="flow-stage">
+              <div className="flow-content">
+                <div className="flow-intro">
+                  <SecHead eyebrow="Event flow" title="From Stall to Stage" />
+                  <p className="quote">{'“'}Sell the dream. Convince the room.{'”'}</p>
+                </div>
+                <div className="flow-window">
+                  <ol className="flow" data-step={activeFlowStep}>
+                    {FLOW.map((f, index) => (
+                      <li key={f.title} aria-hidden={activeFlowStep !== index}>
+                        <div className={'coin' + (f.metal === 'silver' ? ' silver' : '')} aria-hidden="true"><div><b><NumericText value={f.coin} /></b><small>{f.label}</small></div></div>
+                        <div className="tk flow-ticket">
+                          <div className="stub"><span>Admit one</span></div>
+                          <div className="body"><span className="k"><NumericText value={f.kicker} /></span><h3><NumericText value={f.title} /></h3><p><NumericText value={f.body} /></p></div>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -226,16 +255,13 @@ export default function App() {
 
         <section className="band gut" id="sponsor">
           <div className="inner">
-            <SecHead eyebrow="For partners" title="Fuel Innovation" banner />
-            <p className="spons-intro"><NumericText value={SPONSOR_INTRO} /></p>
-            <div className="benefits">{BENEFITS.map(b => <div key={b.text}><Icon name={b.icon} /><b><NumericText value={b.text} /></b></div>)}</div>
-            <SecHead title="Title Sponsor" banner />
+            <SecHead title="In Collaboration with" banner />
             <div className="title-sp">
               {TITLE_TIERS.map(t => <article className="tier" key={t}><h3><NumericText value={t} /></h3><div><span className="ph">Details to be announced</span></div></article>)}
             </div>
             <p className="sub-title">Previous sponsors</p>
-            <div className="logos">{Array.from({ length: 6 }, (_, i) => <div key={i}>[Logo]</div>)}</div>
-            <p style={{ textAlign: 'center', marginTop: 28 }}><a className="cta" href="#contact">Become a sponsor</a></p>
+            <div className="logos">{PAST_SPONSORS.map(sponsor => <div className="sponsor-logo" key={sponsor.name}><img src={sponsor.logo} alt={`${sponsor.name} logo`} /></div>)}</div>
+            <p style={{ textAlign: 'center', marginTop: 28 }}><a className="cta sponsor-cta" href="#contact">Become a sponsor</a></p>
           </div>
         </section>
 
@@ -243,25 +269,29 @@ export default function App() {
           <div className="inner">
             <SecHead title="Gallery" banner />
             <div className="gallery">
-              {GALLERY.map(g => <figure className="snap" key={g.caption} style={{ '--r': g.tilt + 'deg', margin: 0 }}><div>[Photo]</div><p><NumericText value={g.caption} /></p></figure>)}
+              {GALLERY.map(g => <figure className="snap" key={g.caption} style={{ '--r': g.tilt + 'deg', margin: 0 }}><img className="gallery-photo" src={g.image} alt={g.alt} loading="lazy" decoding="async" /><p><NumericText value={g.caption} /></p></figure>)}
             </div>
           </div>
         </section>
 
-        <section className="band gut" id="contact">
+        <section className="band gut team-section" id="team">
           <div className="inner">
-            <div className="sec-head"><div className="banner"><h2>Contact Us</h2></div><p className="eyebrow" style={{ marginTop: 14 }}>{EVENT.presenter}</p></div>
-            <div className="contacts">
-              {CONTACTS.map(c => (
-                <div className="ct" key={c.name}>
-                  <b><NumericText value={c.name} /></b>
-                  <div className="row"><span><NumericText value={c.phone} /></span><CopyButton value={c.phone} /></div>
-                  <div className="row"><span><NumericText value={c.email} /></span><CopyButton value={c.email} /></div>
+            <SecHead title="Our Team" banner />
+            <p className="team-intro">Meet the student team behind SITank 3.0.</p>
+            <div className="team-grid">
+              {TEAM.map(member => <article className="team-card" key={member.name}>
+                <div className="team-photo-wrap">
+                  <img src={member.photo} alt={member.temporaryPhoto ? `Temporary portrait placeholder for ${member.name}` : `${member.name}, ${member.role}`} loading="lazy" decoding="async" />
+                  {member.temporaryPhoto && <span>Temporary portrait</span>}
                 </div>
-              ))}
+                <h3><NumericText value={member.name} /></h3>
+                <p>{member.role}</p>
+              </article>)}
             </div>
           </div>
         </section>
+
+        <ContactSection />
       </main>
 
       <footer className="gut">

@@ -13,7 +13,7 @@ export const EVENT = {
 export interface NavItem { id: string; label: string }
 export const NAV: readonly NavItem[] = [
   { id: 'about', label: 'About' }, { id: 'event', label: 'The Event' }, { id: 'flow', label: 'Flow' },
-  { id: 'why', label: 'Why SITank 3.0' }, { id: 'sponsor', label: 'Sponsor' }, { id: 'contact', label: 'Contact' },
+  { id: 'why', label: 'Why SITank 3.0' }, { id: 'sponsor', label: 'Sponsor' }, { id: 'team', label: 'Our Team' }, { id: 'contact', label: 'Contact' },
 ];
 
 export interface AboutCard { title: string; body: string; facts: readonly string[] }
@@ -68,17 +68,45 @@ export const BENEFITS: readonly Benefit[] = [
 
 export const TITLE_TIERS: readonly string[] = ['Digital & Media Visibility', 'On-Ground Branding', 'Engagement & Participation', 'Merchandise & Branding'];
 
-export interface Snap { caption: string; tilt: number }
+export const PAST_SPONSORS = [
+  { name: 'Insterra', logo: '/art/insterra.webp' },
+  { name: 'Incubein Foundation', logo: '/art/Incubein%20Foundation.webp' },
+  { name: 'Harrier', logo: '/art/Harrier.webp' },
+] as const;
+
+export interface Snap { caption: string; alt: string; image: string; tilt: number }
 export const GALLERY: readonly Snap[] = [
-  { caption: 'Exhibition stalls', tilt: -2.5 }, { caption: 'Jury pitching', tilt: 1.8 }, { caption: 'The big reveal', tilt: -1.2 }, { caption: 'Mentor sessions', tilt: 2.2 }, { caption: 'Carnival nights', tilt: -1.8 }, { caption: 'Winners', tilt: 1.2 },
+  { image: '/art/optimized/gallery/1.webp', alt: 'Guests and students at an inauguration ribbon cutting', caption: 'Inauguration', tilt: -2.5 },
+  { image: '/art/optimized/gallery/2.webp', alt: 'A mentor and students discussing a robotics project', caption: 'Project Demo', tilt: 1.8 },
+  { image: '/art/optimized/gallery/3.webp', alt: 'Guests visiting student exhibition displays', caption: 'Jury Walkthrough', tilt: -1.2 },
+  { image: '/art/optimized/gallery/4.webp', alt: 'Students presenting projects at exhibition stalls', caption: 'Exhibition Stalls', tilt: 2.2 },
+  { image: '/art/optimized/gallery/5.webp', alt: 'A mentor speaking with a student team at their stall', caption: 'Mentor Session', tilt: -1.8 },
+  { image: '/art/optimized/gallery/6.webp', alt: 'SITank participants gathered outside the institute', caption: 'SITank Community', tilt: 1.2 },
+  { image: '/art/optimized/gallery/7.webp', alt: 'Guests viewing a student project beneath a red canopy', caption: 'Live Demonstrations', tilt: -1.5 },
+  { image: '/art/optimized/gallery/8.webp', alt: 'Audience attending a startup pitching session', caption: 'Pitching Session', tilt: 1.6 },
 ];
 
-export interface Contact { name: string; phone: string; email: string }
+export interface Contact { name: string; phone: string; email: string; photo: string; role: string }
 export const CONTACTS: readonly Contact[] = [
-  { name: 'Nehal Saad', phone: '+91 74995 16411', email: 'nehal.saad.batch2025@sitnagpur.siu.edu.in' },
-  { name: 'Siddhesh Thakur', phone: '+91 99305 77000', email: 'siddhesh.thakur.batch2025@sitnagpur.siu.edu.in' },
-  { name: 'Parth Tiwaskar', phone: '+91 91123 74118', email: 'parth.tiwaskar.batch2024@sitnagpur.siu.edu.in' },
-  { name: 'Aaditya Wanjari', phone: '+91 75587 83048', email: 'aaditya.wanjari.batch2025@sitnagpur.siu.edu.in' },
-  { name: 'Laksh Rathi', phone: '+91 95296 41866', email: 'laksh.rathi.batch2026@sitnagpur.siu.edu.in' },
-  { name: 'Anirudh Jajoo', phone: '+91 86686 93168', email: 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in' },
+  { name: 'Nehal Saad', role: 'Coordinator', phone: '+91 7499516411', email: 'nehal.saad.batch2025@sitnagpur.siu.edu.in', photo: '/art/optimized/team/NehalSaad.webp' },
+  { name: 'Parth Tiwaskar', role: 'Coordinator', phone: '+91 9112374118', email: 'parth.tiwaskar.batch2024@sitnagpur.siu.edu.in', photo: '/art/optimized/team/parth-tiwaskar.webp' },
+  { name: 'Siddhesh Thakur', role: 'Co-Coordinator', phone: '+91 9930577000', email: 'siddhesh.thakur.batch2025@sitnagpur.siu.edu.in', photo: '/art/optimized/team/siddesh-thakur.webp' },
+  { name: 'Aaditya Wanjari', role: 'Co-Coordinator', phone: '+91 7558783048', email: 'aaditya.wanjari.batch2025@sitnagpur.siu.edu.in', photo: '/art/optimized/team/Aditya wanjari.webp' },
+  { name: 'Laksh Rathi', role: 'Co-Coordinator', phone: '+91 9529641866', email: 'laksh.rathi.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/laksh-rathi.webp' },
+  { name: 'Anirudh Jajoo', role: 'Co-Coordinator', phone: '+91 8668693168', email: 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/laksh-rathi.webp' },
+];
+
+export interface TeamMember { name: string; role: string; photo: string; temporaryPhoto?: boolean }
+export const TEAM_LEADERS: readonly TeamMember[] = [
+  { name: 'Prathmesh Raipurkar', role: 'President', photo: '/art/optimized/team/prathmesh-raipurkar.webp' },
+  { name: 'Harsh Kumar', role: 'Vice President (Technical)', photo: '/art/optimized/team/harsh-kumar.webp' },
+  { name: 'Swanandi Thaker', role: 'Vice President (Co-Curricular)', photo: '/art/optimized/team/swanandi-thaker.webp' },
+  { name: 'Heena Khilnani', role: 'Sponsorship', photo: '/art/optimized/team/heena-khilnani.webp' },
+  { name: 'Jash Chauhan', role: 'Web & IT', photo: '/art/optimized/team/jash.webp' },
+  { name: 'Ansh Sonkusare', role: 'Web & IT', photo: '/art/optimized/team/laksh-rathi.webp', temporaryPhoto: true },
+];
+
+export const TEAM: readonly TeamMember[] = [
+  ...TEAM_LEADERS,
+  ...CONTACTS.map(({ name, photo, role }) => ({ name, role, photo })),
 ];

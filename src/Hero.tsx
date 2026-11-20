@@ -84,7 +84,7 @@ export default function Hero() {
           </span>
         </div>
         <Countdown />
-        <a className="cta hero-cta" href="#contact"><span>Pitch your startup</span></a>
+        <a className="cta hero-cta" id="register-now" href="#contact"><span>Register Now</span></a>
       </div>
     </header>
   );
