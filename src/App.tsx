@@ -146,22 +146,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const viewport = window.visualViewport;
-    const syncVisibleWidth = () => {
-      const visibleWidth = Math.max(window.innerWidth, viewport?.width ?? window.innerWidth);
-      document.documentElement.style.setProperty('--visible-viewport-width', `${visibleWidth}px`);
-    };
-    syncVisibleWidth();
-    viewport?.addEventListener('resize', syncVisibleWidth);
-    window.addEventListener('resize', syncVisibleWidth);
-    return () => {
-      viewport?.removeEventListener('resize', syncVisibleWidth);
-      window.removeEventListener('resize', syncVisibleWidth);
-      document.documentElement.style.removeProperty('--visible-viewport-width');
-    };
-  }, []);
-
-  useEffect(() => {
     if (window.location.hash) {
       window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
     }
