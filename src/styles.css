@@ -229,6 +229,11 @@ section.band.alt { background: linear-gradient(var(--night-deep), var(--night) 4
 .tier h3 { background: var(--ribbon); color: var(--cream); margin: 8px 8px 0; padding: 10px 12px; text-align: center; font-size: 15px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; }
 .tier div { padding: 18px 20px; display: grid; align-content: center; gap: 8px; color: #5b4a40; }
 @media (max-width: 640px) { .title-sp { grid-template-columns: 1fr; gap: 18px; } .title-sp::before, .title-sp::after { display: none; } }
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  #sponsor .sec-head { width: 100%; min-width: 0; }
+  #sponsor .sec-head .banner { width: max-content; max-width: calc(100% - 14px); padding: 10px 14px; }
+  #sponsor .sec-head .banner h2 { max-width: 100%; font-size: clamp(16px, 4.6vw, 28px); line-height: 1.25; letter-spacing: .12em; padding-left: .12em; overflow-wrap: anywhere; }
+}
 .ph { font-family: var(--f-display); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ribbon); border: 1px dashed currentColor; padding: 3px 8px; justify-self: start; }
 .logos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; width: min(820px, 100%); margin-inline: auto; }
 .logos .sponsor-logo { aspect-ratio: 3 / 2; min-width: 0; padding: 14px; border: 1px solid rgb(246 230 207 / .55); border-radius: 6px; background: #fff; display: grid; place-items: center; box-shadow: 0 10px 24px rgb(0 0 0 / .2); }
