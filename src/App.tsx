@@ -13,6 +13,66 @@ function useActiveSection() {
   return active;
 }
 
+function WinterScrollbar() {
+  const [metrics, setMetrics] = useState({ top: 0, height: 48, scroll: 0, maxScroll: 0 });
+  const dragOffset = useRef(0);
+
+  useEffect(() => {
+    const update = () => {
+      const viewport = window.innerHeight;
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - viewport);
+      const height = Math.min(viewport, Math.max(42, viewport * viewport / Math.max(viewport, document.documentElement.scrollHeight)));
+      const maxTop = Math.max(0, viewport - height);
+      setMetrics({ top: maxScroll ? window.scrollY / maxScroll * maxTop : 0, height, scroll: window.scrollY, maxScroll });
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    const observer = new ResizeObserver(update);
+    observer.observe(document.documentElement);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+      observer.disconnect();
+    };
+  }, []);
+
+  const dragTo = (clientY: number) => {
+    const maxTop = Math.max(1, window.innerHeight - metrics.height);
+    const top = Math.min(maxTop, Math.max(0, clientY - dragOffset.current));
+    window.scrollTo(0, top / maxTop * metrics.maxScroll);
+  };
+
+  return <div
+    className="winter-scroll-thumb"
+    role="scrollbar"
+    aria-label="Page scroll"
+    aria-controls="root"
+    aria-orientation="vertical"
+    aria-valuemin={0}
+    aria-valuemax={Math.round(metrics.maxScroll)}
+    aria-valuenow={Math.round(metrics.scroll)}
+    tabIndex={0}
+    style={{ top: metrics.top, height: metrics.height }}
+    onPointerDown={event => {
+      dragOffset.current = event.clientY - event.currentTarget.getBoundingClientRect().top;
+      event.currentTarget.setPointerCapture(event.pointerId);
+      event.currentTarget.classList.add('is-dragging');
+    }}
+    onPointerMove={event => { if (event.currentTarget.hasPointerCapture(event.pointerId)) dragTo(event.clientY); }}
+    onPointerUp={event => { event.currentTarget.releasePointerCapture(event.pointerId); event.currentTarget.classList.remove('is-dragging'); }}
+    onKeyDown={event => {
+      const step = event.key === 'PageDown' || event.key === 'PageUp' ? window.innerHeight * .9 : 80;
+      if (event.key === 'ArrowDown' || event.key === 'PageDown') window.scrollBy({ top: step, behavior: 'smooth' });
+      else if (event.key === 'ArrowUp' || event.key === 'PageUp') window.scrollBy({ top: -step, behavior: 'smooth' });
+      else if (event.key === 'Home') window.scrollTo({ top: 0, behavior: 'smooth' });
+      else if (event.key === 'End') window.scrollTo({ top: metrics.maxScroll, behavior: 'smooth' });
+      else return;
+      event.preventDefault();
+    }}
+  />;
+}
+
 function CopyButton({ value }: { value: string }) {
   const [label, setLabel] = useState('Copy');
   const flash = (t: string) => { setLabel(t); setTimeout(() => setLabel('Copy'), 1400); };
@@ -35,6 +95,10 @@ export default function App() {
   const collapsePosition = useRef(0);
 
   useEffect(() => {
+    if (window.location.hash) {
+      window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
+    }
+
     let lastScrollY = window.scrollY;
     if (lastScrollY > 150) {
       collapsePosition.current = lastScrollY;
@@ -74,9 +138,24 @@ export default function App() {
     setNavExpanded(next);
   };
 
+  const handleSectionNavigation = (event: MouseEvent<HTMLDivElement>) => {
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest<HTMLAnchorElement>('a[href^="#"]');
+    if (!link || (link.closest('.nav') && !navExpandedRef.current)) return;
+
+    const id = link.getAttribute('href')?.slice(1);
+    const section = id && document.getElementById(id);
+    if (!section) return;
+
+    event.preventDefault();
+    window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
-    <div className="site-shell" onDragStartCapture={event => event.preventDefault()}>
+    <div className="site-shell" onDragStartCapture={event => event.preventDefault()} onClickCapture={handleSectionNavigation}>
       <Snow />
+      <WinterScrollbar />
       <nav className={`nav ${navExpanded ? 'is-expanded' : 'is-collapsed'}`} aria-label="Sections" onClick={handleNavClick}>
         <div className="inner">
           <a className="brand" href="#top" tabIndex={navExpanded ? 0 : -1}><img src="/art/tent-top.webp" alt="" /><NumericText value={EVENT.name} /></a>

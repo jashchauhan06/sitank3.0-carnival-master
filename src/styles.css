@@ -16,7 +16,12 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; scrollbar-width: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.winter-scroll-thumb { position: fixed; z-index: 120; top: 0; right: 3px; width: 8px; min-height: 42px; border: 1px solid rgb(255 248 229 / .8); border-radius: 999px; background: linear-gradient(180deg, var(--frost), var(--cream) 34%, var(--bulb) 72%, #c89648); box-shadow: 0 0 8px rgb(246 196 106 / .45); cursor: url('/art/winter-cursor-crisp.png') 4 5, grab !important; touch-action: none; user-select: none; }
+.winter-scroll-thumb:hover, .winter-scroll-thumb.is-dragging { width: 10px; right: 2px; background: linear-gradient(180deg, #f6ead7, var(--bulb) 55%, #f0ae52); box-shadow: 0 0 12px rgb(246 196 106 / .7); }
+.winter-scroll-thumb.is-dragging { cursor: url('/art/winter-cursor-crisp.png') 4 5, grabbing !important; }
+.winter-scroll-thumb:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
 body { margin: 0; background: var(--night-deep); color: var(--cream); font-family: var(--f-body); font-size: 17px; line-height: 1.65; overflow-x: hidden; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--night-deep); }
 img { max-width: 100%; display: block; -webkit-user-drag: none; user-select: none; }
@@ -100,7 +105,7 @@ a { color: inherit; }
 .tagline { display: flex; align-items: center; gap: 16px; font-family: var(--f-display); font-size: clamp(12px, 1.4vw, 16px); letter-spacing: .34em; margin-top: 14px; color: var(--cream-dim); }
 .tagline::before, .tagline::after { content: ""; width: clamp(28px, 6vw, 60px); height: 1px; background: currentColor; }
 .scene { position: relative; z-index: 2; margin-top: auto; width: 100%; aspect-ratio: 1180 / 420; min-height: 230px; }
-.scene .field { position: absolute; inset: auto 0 0; height: 100%; background: url(/art/field.webp) center 62% / cover no-repeat; opacity: .48; -webkit-mask: linear-gradient(transparent, #000 34%); mask: linear-gradient(transparent, #000 34%); }
+.scene .field { position: absolute; inset: auto -24px 0; height: 100%; background: url(/art/field.webp) center 62% / cover no-repeat; opacity: .48; -webkit-mask: linear-gradient(transparent, #000 34%); mask: linear-gradient(transparent, #000 34%); }
 .scene img { position: absolute; will-change: transform; }
 .scene .bigtop { width: 36%; left: 32%; bottom: 13%; filter: drop-shadow(0 0 30px rgb(246 196 106 / .35)); }
 .scene .wheel { width: 19%; right: 3%; bottom: 13%; }
@@ -117,13 +122,13 @@ a { color: inherit; }
 .glow { animation: glow 3.6s ease-in-out infinite; }
 .glow.slow { animation-duration: 5.2s; animation-delay: -1.4s; }
 @keyframes glow { 50% { filter: brightness(1.28) drop-shadow(0 0 10px rgb(246 196 106 / .55)); } }
-.ticket { position: relative; z-index: 16; align-self: center; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 22px; margin: -6% 16px clamp(20px, 3.5vh, 36px); padding: 12px 26px; border: 1px solid rgb(246 230 207 / .7); border-radius: 999px; background: #131b30; box-shadow: 0 6px 18px rgb(0 0 0 / .26); font-family: var(--f-display); font-weight: 500; font-size: clamp(14px, 1.6vw, 18px); }
+.ticket { position: relative; z-index: 16; align-self: center; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 22px; margin: -6% 16px clamp(20px, 3.5vh, 36px); padding: 12px 26px; border: 1px solid rgb(246 230 207 / .56); border-radius: 999px; background: #131b30 url('/art/date-timer-bg.png') center / cover no-repeat; box-shadow: 0 6px 18px rgb(0 0 0 / .26); font-family: var(--f-display); font-weight: 500; font-size: clamp(14px, 1.6vw, 18px); }
 .ticket .it { display: flex; align-items: center; gap: 10px; }
 .ticket svg { width: 22px; height: 22px; flex: none; }
 .ticket .sep { width: 1px; height: 26px; background: rgb(246 230 207 / .5); }
 .ticket sup { font-size: .6em; }
 @media (max-width: 520px) { .ticket .sep { display: none; } .ticket { border-radius: 18px; } }
-.countdown { position: relative; z-index: 16; display: flex; justify-content: center; gap: clamp(14px, 4vw, 36px); margin: 0 0 clamp(22px, 4vh, 40px); padding: 10px 20px; border: 1px solid rgb(246 230 207 / .66); border-radius: 999px; background: #131b30; box-shadow: 0 6px 18px rgb(0 0 0 / .26); font-variant-numeric: tabular-nums; }
+.countdown { position: relative; z-index: 16; display: flex; justify-content: center; gap: clamp(14px, 4vw, 36px); margin: 0 0 clamp(22px, 4vh, 40px); padding: 10px 20px; border: 1px solid rgb(246 230 207 / .56); border-radius: 999px; background: #131b30 url('/art/date-timer-bg.png') center / cover no-repeat; box-shadow: 0 6px 18px rgb(0 0 0 / .26); font-variant-numeric: tabular-nums; }
 .hero-cta { display: flex; align-items: center; justify-content: center; width: max-content; text-align: center; position: relative; z-index: 16; align-self: center; margin: -10px 0 26px; border-radius: 9999px; }
 .hero-cta span { display: block; position: static; padding-left: .2em; text-align: center; }
 .countdown div { display: grid; justify-items: center; }
@@ -239,6 +244,10 @@ footer .bush-l { left: 0; } footer .bush-r { right: 0; }
 #snow { position: fixed; inset: 0; z-index: 15; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .nav .inner, .nav .brand, .nav ul, .nav .cta, .nav .nav-toggle { transition: none; } .glow { animation: none; } #snow { display: none; } .snap { transition: none; } }
 
+/* Custom cursor, tightly cropped and sized for browser limits. */
+body { cursor: url('/art/winter-cursor-crisp.png') 4 5, auto; }
+body a, body button, body [role='button'], body input[type='button'], body input[type='submit'], body select { cursor: url('/art/winter-cursor-crisp.png') 4 5, pointer !important; }
+
 /* ---------- wide-screen composition ---------- */
 @media (min-width: 1100px) {
   .inner { max-width: 1240px; }
@@ -292,10 +301,11 @@ footer .bush-l { left: 0; } footer .bush-r { right: 0; }
   .tagline { margin-top: 3px; padding: 5px 14px; font-size: 12px; line-height: 1.2; color: var(--cream); background: rgb(19 27 48 / .82); border: 1px solid rgb(246 230 207 / .42); border-radius: 999px; text-shadow: 0 1px 6px rgb(0 0 0 / .75); }
 
   .hero .frame { max-width: min(1680px, calc(100vw - 40px)); }
-  .scene { position: absolute; inset: auto 0 -38px; width: 100%; height: 24%; min-height: 0; aspect-ratio: auto; }
-  .scene .field { inset: auto 0 -28px; height: calc(100% + 28px); }
+  .scene { position: absolute; inset: auto 0 0; width: 100%; height: 24%; min-height: 0; aspect-ratio: auto; }
+  .scene .field { inset: auto -24px 0; height: 100%; }
   .scene .bigtop { width: 24%; left: 38%; bottom: 0; }
   .scene .wheel { width: 19%; right: 4%; bottom: 35%; }
+  .scene .bush-l, .scene .bush-r { bottom: 10px; }
   .ticket { position: absolute; left: 50%; right: auto; bottom: 205px; translate: -50% 0; width: max-content; max-width: calc(100% - 40px); flex-wrap: nowrap; gap: 10px 28px; margin: 0; padding: 10px 28px; font-size: 16px; }
   .ticket .it { white-space: nowrap; gap: 10px; }
   .ticket .sep { margin-inline: 2px; }
