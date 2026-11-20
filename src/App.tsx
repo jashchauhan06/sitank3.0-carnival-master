@@ -110,7 +110,7 @@ export default function App() {
   const active = useActiveSection();
   const activeFlowStep = useFlowStep();
   const [loading, setLoading] = useState(true);
-  const [navExpanded, setNavExpanded] = useState(() => window.matchMedia('(max-width: 900px)').matches === false);
+  const [navExpanded, setNavExpanded] = useState(() => !window.matchMedia('(max-width: 900px), (hover: none) and (pointer: coarse)').matches);
   const navExpandedRef = useRef(navExpanded);
   const collapsePosition = useRef(0);
 
