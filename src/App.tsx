@@ -109,9 +109,41 @@ function ContactSection() {
 export default function App() {
   const active = useActiveSection();
   const activeFlowStep = useFlowStep();
+  const [loading, setLoading] = useState(true);
   const [navExpanded, setNavExpanded] = useState(true);
   const navExpandedRef = useRef(true);
   const collapsePosition = useRef(0);
+
+  useEffect(() => {
+    const pageImages = Array.from(document.querySelectorAll<HTMLImageElement>('.site-shell img'))
+      .filter(img => !img.closest('.preloader'));
+    const imageReady = pageImages.map(img => img.complete
+      ? img.decode().catch(() => undefined)
+      : new Promise<void>(resolve => {
+        const finishImage = () => { img.decode().catch(() => undefined).then(() => resolve()); };
+        img.addEventListener('load', finishImage, { once: true });
+        img.addEventListener('error', () => resolve(), { once: true });
+      }));
+    pageImages.forEach(img => { img.loading = 'eager'; });
+    const video = document.querySelector<HTMLVideoElement>('#top video');
+    const videoReady = !video || !video.autoplay || video.readyState >= 2
+      ? Promise.resolve()
+      : new Promise<void>(resolve => {
+        video.addEventListener('loadeddata', () => resolve(), { once: true });
+        video.addEventListener('error', () => resolve(), { once: true });
+      });
+    const fontsReady = document.fonts?.ready.then(() => undefined) ?? Promise.resolve();
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      window.clearTimeout(timeout);
+      setLoading(false);
+    };
+    const timeout = window.setTimeout(finish, 5000);
+    Promise.all([...imageReady, videoReady, fontsReady]).then(finish);
+    return () => window.clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
     if (window.location.hash) {
@@ -173,6 +205,15 @@ export default function App() {
 
   return (
     <div className="site-shell" onDragStartCapture={event => event.preventDefault()} onClickCapture={handleSectionNavigation}>
+      <div className={`preloader${loading ? '' : ' is-ready'}`} aria-hidden={!loading}>
+        <div className="preloader-content" role="status" aria-live="polite">
+          <img src="/art/tent-top.webp" alt="" />
+          <p>Entrepreneurship Cell, SIT Nagpur</p>
+          <h1>SITank 3.0</h1>
+          <span className="preloader-message">Preparing the winter carnival</span>
+          <span className="preloader-progress"><span /></span>
+        </div>
+      </div>
       <Snow />
       <nav className={`nav ${navExpanded ? 'is-expanded' : 'is-collapsed'}`} aria-label="Sections" onClick={handleNavClick}>
         <div className="inner">

@@ -26,6 +26,18 @@ p { margin: 0; }
 a { color: inherit; }
 .numeric { font-family: var(--f-body); font-variant-numeric: lining-nums tabular-nums; }
 :focus-visible { outline: 2px solid var(--bulb); outline-offset: 3px; }
+.preloader { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px; background: radial-gradient(ellipse at 50% 42%, #26355a, var(--night-deep) 68%); opacity: 1; visibility: visible; transition: opacity .55s ease, visibility .55s ease; }
+.preloader.is-ready { opacity: 0; visibility: hidden; pointer-events: none; }
+.preloader-content { display: grid; justify-items: center; gap: 10px; text-align: center; animation: preloader-arrive .8s ease both; }
+.preloader-content img { width: 72px; height: 54px; object-fit: contain; filter: drop-shadow(0 0 18px rgb(246 196 106 / .28)); }
+.preloader-content p { color: var(--cream-dim); font-family: var(--f-display); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; }
+.preloader-content h1 { color: var(--cream); font-size: clamp(34px, 6vw, 54px); letter-spacing: .04em; }
+.preloader-message { color: var(--bulb); font-family: var(--f-display); font-size: 12px; font-style: italic; letter-spacing: .16em; }
+.preloader-progress { position: relative; display: block; width: min(240px, 65vw); height: 3px; margin-top: 12px; overflow: hidden; border-radius: 99px; background: rgb(246 230 207 / .2); }
+.preloader-progress > span { position: absolute; inset: 0 auto 0 0; width: 38%; border-radius: inherit; background: var(--bulb); box-shadow: 0 0 12px rgb(246 196 106 / .7); animation: preloader-progress 1.2s ease-in-out infinite alternate; }
+@keyframes preloader-progress { from { transform: translateX(-105%); } to { transform: translateX(265%); } }
+@keyframes preloader-arrive { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .preloader-content, .preloader-progress > span { animation: none; } .preloader-progress > span { width: 100%; transform: none; } }
 .gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .inner { max-width: 1080px; margin-inline: auto; }
 .eyebrow { font-family: var(--f-display); font-size: 12px; font-weight: 500; letter-spacing: var(--track); text-transform: uppercase; color: var(--cream-dim); }
