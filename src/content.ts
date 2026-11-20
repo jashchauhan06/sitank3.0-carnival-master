@@ -92,8 +92,8 @@ export const CONTACTS: readonly Contact[] = [
   { name: 'Parth Tiwaskar', role: 'Coordinator', phone: '+91 9112374118', email: 'parth.tiwaskar.batch2024@sitnagpur.siu.edu.in', photo: '/art/optimized/team/parth-tiwaskar.webp' },
   { name: 'Siddhesh Thakur', role: 'Co-Coordinator', phone: '+91 9930577000', email: 'siddhesh.thakur.batch2025@sitnagpur.siu.edu.in', photo: '/art/optimized/team/siddesh-thakur.webp' },
   { name: 'Aaditya Wanjari', role: 'Co-Coordinator', phone: '+91 7558783048', email: 'aaditya.wanjari.batch2025@sitnagpur.siu.edu.in', photo: '/art/optimized/team/Aditya wanjari.webp' },
-  { name: 'Laksh Rathi', role: 'Co-Coordinator', phone: '+91 9529641866', email: 'laksh.rathi.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/no-image.png' },
-  { name: 'Anirudh Jajoo', role: 'Co-Coordinator', phone: '+91 8668693168', email: 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/no-image.png' },
+  { name: 'Laksh Rathi', role: 'Co-Coordinator', phone: '+91 9529641866', email: 'laksh.rathi.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/Laksh Rathi.webp' },
+  { name: 'Anirudh Jajoo', role: 'Co-Coordinator', phone: '+91 8668693168', email: 'anirudh.jajoo.batch2026@sitnagpur.siu.edu.in', photo: '/art/optimized/team/Anirudh Jajoo.webp' },
 ];
 
 export interface TeamMember { name: string; role: string; photo: string; temporaryPhoto?: boolean }
@@ -103,7 +103,7 @@ export const TEAM_LEADERS: readonly TeamMember[] = [
   { name: 'Swanandi Thaker', role: 'Vice President (Co-Curricular)', photo: '/art/optimized/team/swanandi-thaker.webp' },
   { name: 'Heena Khilnani', role: 'Sponsorship', photo: '/art/optimized/team/heena-khilnani.webp' },
   { name: 'Jash Chauhan', role: 'Web & IT', photo: '/art/optimized/team/jash.webp' },
-  { name: 'Ansh Sonkusare', role: 'Web & IT', photo: '/art/optimized/team/no-image.png'},
+  { name: 'Ansh Sonkusare', role: 'Web & IT', photo: '/art/optimized/team/no-image.png' },
 ];
 
 export const TEAM: readonly TeamMember[] = [
