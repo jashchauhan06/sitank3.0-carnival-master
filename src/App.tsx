@@ -318,7 +318,7 @@ export default function App() {
         <section className="band gut team-section" id="team">
           <div className="inner">
             <SecHead title="Our Team" banner />
-            <p className="team-intro">Meet the student team behind SITank 3.0.</p>
+            <p className="team-intro"><NumericText value="Meet the student team behind SITank 3.0." /></p>
             <div className="team-grid">
               {TEAM.map(member => <article className="team-card" key={member.name}>
                 <div className="team-photo-wrap">
