@@ -1,4 +1,4 @@
-import { useEffect, useState, type MouseEvent } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import Hero from './Hero';
 import { Corners, SecHead, Icon, Snow, NumericText } from './bits';
 import { EVENT, NAV, ABOUT, PITCH, FLOW, WHY, SPONSOR_INTRO, BENEFITS, TITLE_TIERS, GALLERY, CONTACTS } from './content';
@@ -30,16 +30,66 @@ function CopyButton({ value }: { value: string }) {
 
 export default function App() {
   const active = useActiveSection();
+  const [navExpanded, setNavExpanded] = useState(true);
+  const navExpandedRef = useRef(true);
+  const collapsePosition = useRef(0);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    if (lastScrollY > 150) {
+      collapsePosition.current = lastScrollY;
+      navExpandedRef.current = false;
+      setNavExpanded(false);
+    }
+
+    const onScroll = () => {
+      const current = window.scrollY;
+      if (navExpandedRef.current && current > lastScrollY && current > 150) {
+        collapsePosition.current = current;
+        navExpandedRef.current = false;
+        setNavExpanded(false);
+      } else if (!navExpandedRef.current && current < lastScrollY && collapsePosition.current - current > 80) {
+        navExpandedRef.current = true;
+        setNavExpanded(true);
+      }
+      lastScrollY = current;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const handleNavClick = (event: MouseEvent<HTMLElement>) => {
+    if (!navExpandedRef.current) {
+      event.preventDefault();
+      navExpandedRef.current = true;
+      setNavExpanded(true);
+    }
+  };
+
+  const toggleNav = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    const next = !navExpandedRef.current;
+    navExpandedRef.current = next;
+    setNavExpanded(next);
+  };
+
   return (
-    <>
+    <div className="site-shell" onDragStartCapture={event => event.preventDefault()}>
       <Snow />
-      <nav className="nav gut" aria-label="Sections">
+      <nav className={`nav ${navExpanded ? 'is-expanded' : 'is-collapsed'}`} aria-label="Sections" onClick={handleNavClick}>
         <div className="inner">
-          <a className="brand" href="#top"><img src="/art/tent-top.webp" alt="" /><NumericText value={EVENT.name} /></a>
-          <ul>{NAV.map(n => <li key={n.id}><a href={'#' + n.id} aria-current={active === n.id}><NumericText value={n.label} /></a></li>)}</ul>
-          <a className="cta" href="#contact">Pitch your startup</a>
+          <a className="brand" href="#top" tabIndex={navExpanded ? 0 : -1}><img src="/art/tent-top.webp" alt="" /><NumericText value={EVENT.name} /></a>
+          <ul aria-hidden={!navExpanded}>
+            {NAV.map(n => <li key={n.id}><a href={'#' + n.id} aria-current={active === n.id} tabIndex={navExpanded ? 0 : -1}><NumericText value={n.label} /></a></li>)}
+          </ul>
+          <a className="cta" href="#contact" tabIndex={navExpanded ? 0 : -1}>Pitch your startup</a>
+          <button className="nav-toggle" type="button" aria-label={navExpanded ? 'Collapse navigation' : 'Expand navigation'} aria-expanded={navExpanded} onClick={toggleNav}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">{navExpanded ? <path d="m6 6 12 12M18 6 6 18" /> : <path d="M4 6h16M4 12h16M4 18h16" />}</svg>
+          </button>
         </div>
       </nav>
+      <div className="nav-spacer" aria-hidden="true" />
 
       <Hero />
 
@@ -143,6 +193,6 @@ export default function App() {
           <p>{EVENT.tagline} {'·'} <NumericText value="4–6 FEB 2027" /> {'·'} SIT NAGPUR</p>
         </div>
       </footer>
-    </>
+    </div>
   );
 }

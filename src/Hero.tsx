@@ -3,10 +3,10 @@ import { EVENT } from './content';
 import { Corners, NumericText } from './bits';
 
 const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
-interface SceneLayer { cls: string; file: string; depth: number }
+interface SceneLayer { cls: string; file: string; ext?: 'png' | 'webp'; depth: number }
 const SCENE: readonly SceneLayer[] = [
   { cls: 'fairy glow', file: 'fairy', depth: 6 }, { cls: 'tent-grey', file: 'tent-grey', depth: 4 },
-  { cls: 'tent-cream', file: 'tent-cream', depth: 7 }, { cls: 'wheel', file: 'wheel', depth: 9 },
+  { cls: 'tent-cream', file: 'tent-cream', depth: 7 }, { cls: 'wheel', file: 'wheel-full', ext: 'png', depth: 9 },
   { cls: 'bigtop', file: 'bigtop', depth: 12 }, { cls: 'stall', file: 'stall', depth: 16 },
   { cls: 'bush-l', file: 'bush-l', depth: 22 }, { cls: 'bush-r', file: 'bush-r', depth: 22 },
 ];
@@ -49,6 +49,9 @@ export default function Hero() {
 
   return (
     <header className="hero gut" id="top">
+      <video className="hero-video" aria-hidden="true" autoPlay={!reduce} muted loop playsInline preload={reduce ? 'none' : 'metadata'} poster="/art/field.webp">
+        <source src="/art/bg.mp4" type="video/mp4" />
+      </video>
       <div className="stars" />
       <img className="deco branch-l" src="/art/branch-l.webp" alt="" />
       <img className="deco branch-r" src="/art/branch-r.webp" alt="" />
@@ -67,7 +70,7 @@ export default function Hero() {
         </div>
         <div className="scene" aria-hidden="true">
           <div className="field" />
-          {SCENE.map((l, i) => <img key={l.file} ref={el => { layers.current[i] = el; }} className={l.cls} data-d={l.depth} src={`/art/${l.file}.webp`} alt="" />)}
+          {SCENE.map((l, i) => <img key={l.file} ref={el => { layers.current[i] = el; }} className={l.cls} data-d={l.depth} src={`/art/${l.file}.${l.ext ?? 'webp'}`} alt="" />)}
         </div>
         <div className="ticket">
           <span className="it">
@@ -81,6 +84,7 @@ export default function Hero() {
           </span>
         </div>
         <Countdown />
+        <a className="cta hero-cta" href="#contact"><span>Pitch your startup</span></a>
       </div>
     </header>
   );
